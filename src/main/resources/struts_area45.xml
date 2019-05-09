@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"    
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<!-- 2. 专用常量配置(area45) -->
+	<!-- 2.1. 是否开启开发模式，默认为false，开发阶段可设置为true -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 2.2. 是否开启自动重新加载修改后的struts配置文件，默认为false，开发阶段可设置为true -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 2.3. 是否开启浏览器缓存静态内容，默认为true用于生成环境，开发阶段可设置为false -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<!-- 2.4. 是否开启动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<!-- 2.5. 【对象工厂名称】管理对象创建(如action)，默认struts，与spring整合可设置为spring -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 2.6. 【控制器的扩展名】默认为action，可以改为do,也可改为空字符，表示没有扩展名 -->
+	<constant name="struts.action.extension" value="" />
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	
+	<!-- 9. 控制器配置(area45) -->
+	<!-- (1) name是自定义名称 -->
+	<!-- (2) namespace命名空间是相对于上下文的url路径名称 -->
+	<!-- (3) 必须继承 struts-default -->
+	<package name="prj_area45" namespace="/area45" extends="struts-default">
+	<!-- 定义拦截器 -->
+	  <interceptors>
+             <interceptor name="loginInteceptor" class="edu.uc.interceptor.LoginInterceptor">
+             </interceptor>
+               <interceptor-stack name="myStack">
+                <!-- 必须引用struts-default.xml中的拦截器栈 -->
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <!-- 自己的拦截器 -->
+                <interceptor-ref name="loginInteceptor"></interceptor-ref>
+            </interceptor-stack>
+     </interceptors>
+      <!-- 配置全局拦截器为 -->
+      <default-interceptor-ref name="defaultStack"></default-interceptor-ref>
+      <!-- 定义默认action -->
+      <default-action-ref name="login"></default-action-ref>
+	<!-- 普通action找不到，会到全局result找 实在找不到抛出异常 -->
+		<global-results>
+			<result name="go_ok">/WEB-INF/pubview/go_ok.jsp</result>
+			<result name="go_no">/WEB-INF/pubview/go_no.jsp</result>
+			<result name="go_noright">/WEB-INF/pubview/go_noright.jsp</result>
+			<result name="go_err">/WEB-INF/pubview/go_err.jsp</result>
+			<result name="go_preload">/WEB-INF/pubview/go_preload.jsp</result>
+			<result name="go_reload">/WEB-INF/pubview/go_reload.jsp</result>
+			<result name="login" type="redirectAction">Login_view</result>
+		</global-results>
+		<action name="DemoJson_*" class="DemoJsonAction" method="{1}">
+				<result name="success" type="stream">
+						<param name="contextType">text/html;charset=UTF-8</param>
+						<param name="inputName">rspStream</param>
+				</result>
+				<allowed-methods>json01,json02</allowed-methods>
+		</action>
+		<action name="Demo_*" class="DemoAction" method="{1}">
+			<result name="{1}">/WEB-INF/view45/Demo_{1}.jsp</result>
+			<allowed-methods>test01</allowed-methods>
+		</action>
+		<action name="Test" class="TestAction" method="execute">
+			<result name="view">/WEB-INF/view45/Test.jsp</result>
+		</action>
+		<action name="ValidateCode" class="ValidateCodeAction" method="execute">
+			<result type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">rspStream</param>
+			</result>
+		</action>
+		<action name="Login_*" class="LoginAction" method="{1}">
+			<result name="view">/WEB-INF/view45/login.jsp</result>
+			<!-- 重新指向某个Action -->
+			<result name="main" type="redirectAction">Main_view</result>
+			<allowed-methods>view,logoutDeal,loginDeal</allowed-methods>
+		</action>
+		<action name="Main_*" class="MainAction" method="{1}">
+			<result name="view">/WEB-INF/view45/main.jsp</result>
+			<!-- 重新指向某个Action -->
+			<result name="welcome">/WEB-INF/view45/welcome.jsp</result>
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<allowed-methods>view,welcome</allowed-methods>
+			
+		</action>
+		<action name="*_*" class="{1}Action" method="{2}">
+			<result name="list">/WEB-INF/view45/{1}/{1}_list.jsp</result>
+			<result name="insert">/WEB-INF/view45/{1}/{1}_insert.jsp</result>
+			<result name="update">/WEB-INF/view45/{1}/{1}_update.jsp</result>
+			<result name="detail">/WEB-INF/view45/{1}/{1}_detail.jsp</result>
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<allowed-methods>
+			list,listDeal,insert,insertDeal,delete,deleteDeal,update,updateDeal,detail,detailDeal
+			</allowed-methods>
+			
+		</action>
+		
+		
+	</package>
+</struts>
