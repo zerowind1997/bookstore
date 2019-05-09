@@ -1,3 +1,0 @@
-﻿<script>
-parent.window.location.reload();
-</script>
