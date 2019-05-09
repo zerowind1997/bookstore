@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd	
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd	
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	 <!--1 引入属性文件，在配置中占位使用 -->
+    <context:property-placeholder location="classpath:jdbc.properties" />
+      <!--2 配置C3P0数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <!--驱动类名 -->
+        <property name="driverClass" value="${jdbc.driver}" />
+        <!-- url -->
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <!-- 用户名 -->
+        <property name="user" value="${jdbc.username}" />
+        <!-- 密码 -->
+        <property name="password" value="${jdbc.password}" />
+        <!-- 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数  -->
+        <property name="acquireIncrement" value="5"></property>
+        <!-- 初始连接池大小 -->
+        <property name="initialPoolSize" value="10"></property>
+        <!-- 连接池中连接最小个数 -->
+        <property name="minPoolSize" value="10"></property>
+        <!-- 连接池中连接最大个数 -->
+        <property name="maxPoolSize" value="30"></property>
+        <!-- 关闭链接后不自动commit -->
+        <property name="autoCommitOnClose" value="true"></property>
+        <!-- 获取链接超时时间 -->
+        <property name="checkoutTimeout" value="10000"></property>
+        <!-- 当获取连接失败重次数 -->
+        <property name="acquireRetryAttempts" value="2"></property>
+    </bean>
+
+</beans>
+
+
