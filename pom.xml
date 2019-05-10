@@ -49,7 +49,7 @@
 		<ds.dbcp2.version>2.5.0</ds.dbcp2.version>
 
 		<!-- ***** 1032. [ds-c3p0][props] -->
-		<ds.c3p0.version>0.9.5.2</ds.c3p0.version>
+		<ds.c3p0.version>0.9.5.3</ds.c3p0.version>
 
 		<!-- ***** 1041. [dbutils][props] -->
 		<apache.dbutils.version>1.7</apache.dbutils.version>
