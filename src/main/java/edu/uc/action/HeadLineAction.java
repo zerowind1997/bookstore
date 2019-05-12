@@ -2,11 +2,15 @@ package edu.uc.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.components.Head;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 
 import com.liuvei.common.PagerItem;
@@ -25,16 +29,14 @@ public class HeadLineAction extends CrudAction{
 	 */
 	private static final long serialVersionUID = 5728095598250038085L;
 	
+	@Autowired
 	private HeadLineService headLineService;
 	
 	private String id;
 	private String lineName;
 	private String lineLink;
 	private String lineImg;
-	private String vId;
-	
-	
-	
+		
 
 	public String getId() {
 		return id;
@@ -69,13 +71,6 @@ public class HeadLineAction extends CrudAction{
 		this.lineImg = lineImg;
 	}
 
-	public String getvId() {
-		return vId;
-	}
-
-	public void setvId(String vId) {
-		this.vId = vId;
-	}
 
 	@Override
 	public String list() {
@@ -131,7 +126,7 @@ public class HeadLineAction extends CrudAction{
 	@Override
 	public String insert() {
 		// TODO Auto-generated method stub
-		return "list";
+		return "insert";
 	}
 
 	@Override
@@ -187,8 +182,8 @@ public class HeadLineAction extends CrudAction{
 	@Override
 	public String deleteDeal() {
 		// TODO Auto-generated method stub
-		if(!SysFun.isNullOrEmpty(vId)) {
-			Long iId=SysFun.parseLong(vId);
+		if(!SysFun.isNullOrEmpty(id)) {
+			Long iId=SysFun.parseLong(id);
 			Long result=headLineService.delete(iId);
 			if(result>0) {
 				return "go_ok";
@@ -207,8 +202,8 @@ public class HeadLineAction extends CrudAction{
 		//javax.servlet.ServletContext application=request.getServletContext();
 		
 		//String vId=request.getParameter("id");
-		if(!SysFun.isNullOrEmpty(vId)) {
-			Long iId=SysFun.parseLong(vId);
+		if(!SysFun.isNullOrEmpty(id)) {
+			Long iId=SysFun.parseLong(id);
 			HeadLine bean=headLineService.load(iId);
 			
 			if(bean!=null) {
@@ -290,8 +285,8 @@ public class HeadLineAction extends CrudAction{
 		//javax.servlet.ServletContext application=request.getServletContext();
 		
 		//String vId=request.getParameter("id");
-		if(!SysFun.isNullOrEmpty(vId)) {
-			Long iId=SysFun.parseLong(vId);
+		if(!SysFun.isNullOrEmpty(id)) {
+			Long iId=SysFun.parseLong(id);
 			HeadLine bean=headLineService.load(iId);
 			if(bean!=null) {
 				request.put("bean", bean);
