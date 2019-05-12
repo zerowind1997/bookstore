@@ -34,7 +34,6 @@ public class CustomerAction extends CrudAction{
 	private String phone;
 	private String address;
 
-	private String vId;
 	
 	
 	public String getId() {
@@ -62,13 +61,6 @@ public class CustomerAction extends CrudAction{
 	}
 	
 
-	public String getvId() {
-		return vId;
-	}
-
-	public void setvId(String vId) {
-		this.vId = vId;
-	}
 	
 	
 	
@@ -226,8 +218,8 @@ public class CustomerAction extends CrudAction{
 	@Override
 	public String deleteDeal() {
 		// TODO Auto-generated method stub
-		if(!SysFun.isNullOrEmpty(vId)) {
-			Long iId=SysFun.parseLong(vId);
+		if(!SysFun.isNullOrEmpty(id)) {
+			Long iId=SysFun.parseLong(id);
 			Long result=customerService.delete(iId);
 			if(result>0) {
 				return "go_ok";
@@ -245,9 +237,9 @@ public class CustomerAction extends CrudAction{
 		//javax.servlet.http.HttpSession session=request.getSession();
 		//javax.servlet.ServletContext application=request.getServletContext();
 		
-		//String vId=request.getParameter("id");
-		if(!SysFun.isNullOrEmpty(vId)) {
-			Long iId=SysFun.parseLong(vId);
+		//String id=request.getParameter("id");
+		if(!SysFun.isNullOrEmpty(id)) {
+			Long iId=SysFun.parseLong(id);
 			Customer bean=customerService.load(iId);
 			
 			if(bean!=null) {
@@ -341,9 +333,9 @@ public class CustomerAction extends CrudAction{
 		//javax.servlet.http.HttpSession session=request.getSession();
 		//javax.servlet.ServletContext application=request.getServletContext();
 		
-		//String vId=request.getParameter("id");
-		if(!SysFun.isNullOrEmpty(vId)) {
-			Long iId=SysFun.parseLong(vId);
+		//String id=request.getParameter("id");
+		if(!SysFun.isNullOrEmpty(id)) {
+			Long iId=SysFun.parseLong(id);
 			Customer bean=customerService.load(iId);
 			if(bean!=null) {
 				request.put("bean", bean);

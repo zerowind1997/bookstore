@@ -74,6 +74,7 @@
 			<result name="main" type="redirectAction">Main_view</result>
 			<allowed-methods>view,logoutDeal,loginDeal</allowed-methods>
 		</action>
+		
 		<action name="Main_*" class="MainAction" method="{1}">
 			<result name="view">/WEB-INF/view45/main.jsp</result>
 			<!-- 重新指向某个Action -->
@@ -82,6 +83,7 @@
 			<allowed-methods>view,welcome</allowed-methods>
 			
 		</action>
+		
 		<action name="*_*" class="{1}Action" method="{2}">
 			<result name="list">/WEB-INF/view45/{1}/{1}_list.jsp</result>
 			<result name="insert">/WEB-INF/view45/{1}/{1}_insert.jsp</result>
@@ -91,7 +93,6 @@
 			<allowed-methods>
 			list,listDeal,insert,insertDeal,delete,deleteDeal,update,updateDeal,detail,detailDeal
 			</allowed-methods>
-			
 		</action>
 		
 		
