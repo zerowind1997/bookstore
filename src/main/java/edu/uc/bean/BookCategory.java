@@ -20,7 +20,7 @@ public class BookCategory {
 	@Column(name="categoryName",length=50)
 	private String categoryName;
 	@Column(name="categoryParentId",length=50)
-	private Integer categoryParentId;
+	private Long categoryParentId;
 	public Long getCategoryId() {
 		return categoryId;
 	}
@@ -33,10 +33,10 @@ public class BookCategory {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public Integer getCategoryParentId() {
+	public Long getCategoryParentId() {
 		return categoryParentId;
 	}
-	public void setCategoryParentId(Integer categoryParentId) {
+	public void setCategoryParentId(Long categoryParentId) {
 		this.categoryParentId = categoryParentId;
 	}
 	

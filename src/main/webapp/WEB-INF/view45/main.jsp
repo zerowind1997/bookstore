@@ -78,7 +78,7 @@
 			<dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="Member_list" data-title="会员管理" href="javascript:void(0)">会员管理</a></li>
+					
 					<li><a data-href="NewsCat_list" data-title="类名管理" href="javascript:void(0)">类名管理</a></li>
 					<li><a data-href="News_list" data-title="新闻管理" href="javascript:void(0)">新闻管理</a></li>
 					<li><a data-href="NewsComment_list" data-title="新闻评论管理" href="javascript:void(0)">新闻评论管理</a></li>
@@ -86,21 +86,11 @@
 			</ul>
 		</dd>
 	</dl>
-		<dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a data-href="picture-list.html" data-title="图片管理" href="javascript:void(0)">图片管理</a></li>
-			</ul>
-		</dd>
-	</dl>
 		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe620;</i> 图书管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="product-brand.html" data-title="品牌管理" href="javascript:void(0)">品牌管理</a></li>
-					<li><a data-href="product-category.html" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
-					<li><a data-href="product-list.html" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
+					<li><a data-href="BookCategory_list" data-title="书籍类别管理" href="javascript:void(0)">书籍类别管理</a></li>
 			</ul>
 		</dd>
 	</dl>

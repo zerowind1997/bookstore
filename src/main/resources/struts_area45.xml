@@ -48,19 +48,12 @@
 			<result name="go_reload">/WEB-INF/pubview/go_reload.jsp</result>
 			<result name="login" type="redirectAction">Login_view</result>
 		</global-results>
-		<action name="DemoJson_*" class="DemoJsonAction" method="{1}">
+		<action name="Json_*" class="JsonAction" method="{1}">
 				<result name="success" type="stream">
 						<param name="contextType">text/html;charset=UTF-8</param>
 						<param name="inputName">rspStream</param>
 				</result>
-				<allowed-methods>json01,json02</allowed-methods>
-		</action>
-		<action name="Demo_*" class="DemoAction" method="{1}">
-			<result name="{1}">/WEB-INF/view45/Demo_{1}.jsp</result>
-			<allowed-methods>test01</allowed-methods>
-		</action>
-		<action name="Test" class="TestAction" method="execute">
-			<result name="view">/WEB-INF/view45/Test.jsp</result>
+				<allowed-methods>getCategoryNameList</allowed-methods>
 		</action>
 		<action name="ValidateCode" class="ValidateCodeAction" method="execute">
 			<result type="stream">

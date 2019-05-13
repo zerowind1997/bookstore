@@ -197,6 +197,27 @@ public class BookCategoryDaoImpl extends BaseDaoImpl<BookCategory> implements Bo
 		}
 		return BookCategoryList;
 	}
+	
 
+	@Override
+	public List<BookCategory> getParentIdList(Long id) {
+		
+		List<BookCategory> BookCategoryList = new ArrayList<BookCategory>();
+		String hql = "from BookCategory where categoryParentId=?0";
+		hql += " order by categoryId desc";
+		List<Object> arrParams = new ArrayList<Object>();
+		arrParams.add(id);
+		Object[] params = arrParams.toArray();
+		try {
+			BookCategoryList = getTmpl().execute(this.getCallbackList(BookCategory.class, hql, params));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+
+		} finally {
+
+		}
+		return BookCategoryList;
+	}
 
 }

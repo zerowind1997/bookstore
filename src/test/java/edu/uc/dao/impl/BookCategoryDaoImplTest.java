@@ -63,7 +63,7 @@ public class BookCategoryDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testLoad() {
 		System.out.println("======load======");
 		BookCategory bookCategory = bookCategoryDao.load(2L);
@@ -71,7 +71,7 @@ public class BookCategoryDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testCount() {
 		System.out.println("======count======");
 		Long result = bookCategoryDao.count();
@@ -79,7 +79,7 @@ public class BookCategoryDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testPager() {
 		System.out.println("======Pager======");
 		List<BookCategory> BookCategoryList = bookCategoryDao.pager(1L, 1L);
@@ -91,7 +91,7 @@ public class BookCategoryDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testLoadByName() {
 		System.out.println("======LoadByName======");
 		BookCategory BookCategory = bookCategoryDao.loadByName("书本teste");
@@ -99,7 +99,7 @@ public class BookCategoryDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testCountByName() {
 		System.out.println("======CountByName======");
 		Long result = bookCategoryDao.countByName("书本");
@@ -107,7 +107,7 @@ public class BookCategoryDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	
 	public void testPagerByName() {
 		System.out.println("======CountByName======");
 		List<BookCategory> BookCategoryList = bookCategoryDao.pagerByName("书本",1L, 1L);
@@ -116,5 +116,15 @@ public class BookCategoryDaoImplTest extends BaseTest {
 			System.out.println(BookCategory.getCategoryId());
 		}
 	}
-
+	@Test
+	//@Ignore
+	public void getParentIdList()
+	{
+		System.out.println("======getParentIdList======");
+		List<BookCategory> BookCategoryList = bookCategoryDao.getParentIdList(2L);
+		for(BookCategory BookCategory:BookCategoryList)
+		{
+			System.out.println(BookCategory.getCategoryId());
+		}
+	}
 }
