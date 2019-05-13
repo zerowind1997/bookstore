@@ -90,7 +90,7 @@
 			<dt><i class="Hui-iconfont">&#xe620;</i> 图书管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="BookCategory_list" data-title="书籍类别管理" href="javascript:void(0)">书籍类别管理</a></li>
+					<li><a data-href="BookCategory_list" data-title="书籍类别管理" href="javascript:void(0)">书籍类别管理</a></li
 			</ul>
 		</dd>
 	</dl>
