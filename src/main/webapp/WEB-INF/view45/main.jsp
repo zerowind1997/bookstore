@@ -91,6 +91,7 @@
 			<dd>
 				<ul>
 					<li><a data-href="BookCategory_list" data-title="书籍类别管理" href="javascript:void(0)">书籍类别管理</a></li>
+					<li><a data-href="Book_list" data-title="图书管理" href="javascript:void(0)">图书管理</a></li>
 			</ul>
 		</dd>
 	</dl>

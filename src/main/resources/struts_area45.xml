@@ -53,7 +53,7 @@
 						<param name="contextType">text/html;charset=UTF-8</param>
 						<param name="inputName">rspStream</param>
 				</result>
-				<allowed-methods>getCategoryNameList</allowed-methods>
+				<allowed-methods>getCategoryNameList,updateEnableStatus</allowed-methods>
 		</action>
 		<action name="ValidateCode" class="ValidateCodeAction" method="execute">
 			<result type="stream">
@@ -84,7 +84,6 @@
 			<allowed-methods>
 			list,listDeal,insert,insertDeal,delete,deleteDeal,update,updateDeal,detail,detailDeal
 			</allowed-methods>
-			
 		</action>
 		
 		

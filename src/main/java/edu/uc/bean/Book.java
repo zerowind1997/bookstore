@@ -1,10 +1,13 @@
 package edu.uc.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -17,17 +20,18 @@ public class Book {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="bookId",length=50)
 	private Long bookId;
-	@Column(name="bookCategoryId",length=50)
-	private Long bookCategoryId;
+	@OneToOne(cascade=CascadeType.MERGE)
+	@JoinColumn(name="bookCategoryId",unique=true,nullable=true)
+	private BookCategory bookCategory;
 	@Column(name="bookName",length=50)
 	private String bookName;
 	@Column(name="bookCbs",length=50)
 	private String bookCbs;
 	@Column(name="ISBN",length=20)
 	private String ISBN;
-	@Column(name="bookPrice",length=2)
+	@Column(name="bookPrice",length=11)
 	private Double bookPrice;
-	@Column(name="discountRate",length=2)
+	@Column(name="discountRate",length=11)
 	private Double discountRate;
 	@Column(name="bookAuthor",length=20)
 	private String bookAuthor;
@@ -45,11 +49,11 @@ public class Book {
 	public void setBookId(Long bookId) {
 		this.bookId = bookId;
 	}
-	public Long getBookCategoryId() {
-		return bookCategoryId;
+	public BookCategory getBookCategory() {
+		return bookCategory;
 	}
-	public void setBookCategoryId(Long bookCategoryId) {
-		this.bookCategoryId = bookCategoryId;
+	public void setBookCategory(BookCategory bookCategory) {
+		this.bookCategory = bookCategory;
 	}
 	public String getBookName() {
 		return bookName;

@@ -70,7 +70,7 @@ public class BookDaoImpl extends BaseDaoImpl<Book> implements BookDao {
 		Long result = 0L;
 		try {
 			getTmpl().update(bean);
-			result = 1L;
+			result = bean.getBookId();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
