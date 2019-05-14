@@ -29,7 +29,7 @@
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>用户管理</title>
+<title>书本类别管理</title>
 </head>
 <body>
 	<nav class="breadcrumb">
@@ -41,7 +41,7 @@
 			class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="page-container">
-		<form action="Member_listDeal" method="get">
+		<form action="BookCategory_listDeal" method="get">
 			<!--  <input type="hidden" name="oper" value="listDeal" />--> <input
 				type="hidden" name="${pagerItem.paramPageNum}"
 				value="${pagerItem.pageNum}"> <input type="hidden"
@@ -49,10 +49,10 @@
 
 			<div class="text-c">
 				名称： <input type="text" class="input-text" style="width: 250px"
-					placeholder="输入用户名" id="userName" name="userName"
-					value="${userName}">
+					placeholder="输入书籍类别名" id="categoryName" name="categoryName"
+					value="${categoryName}">
 				<button type="submit" class="btn btn-success radius" id="" name="">
-					<i class="Hui-iconfont">&#xe665;</i> 搜用户
+					<i class="Hui-iconfont">&#xe665;</i> 搜书籍类别
 				</button>
 				<button type="button" class="btn btn-success radius"
 					id="clearSearch" name="">
@@ -64,9 +64,9 @@
 			<span class="l"><a href="javascript:;" onclick="datadel()"
 				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
 					批量删除</a> <a href="javascript:;"
-				onclick="item_add('添加用户','Member_insert','800','510')"
+				onclick="item_add('添加书籍类别','BookCategory_insert','800','510')"
 				class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>
-					添加用户</a></span> <span class="r">共有数据：<strong>${pagerItem.rowCount}</strong>
+					添加书籍类别</a></span> <span class="r">共有数据：<strong>${pagerItem.rowCount}</strong>
 				条
 			</span>
 		</div>
@@ -76,40 +76,37 @@
 				<thead>
 					<tr class="text-c">
 						<th width="25"><input type="checkbox" name="" value=""></th>
-						<th width="80">用户ID</th>
-						<th width="80">用户账号</th>
-						<th width="80">用户昵称</th>
-						<th width="120">手机</th>
-						<th width="40">状态</th>
-						<th width="120">注册时间</th>
-						<th width="120">最后登入时间</th>
-						<th width="70">备注</th>
-						<th width="100">操作</th>
+						<th width="80">书籍类别ID</th>
+						<th width="80">书籍类别名字</th>
+						<th width="80">类别所属类别</th>
+						<th width="80">操作</th>
 					</tr>
 				</thead>
 				<tbody>
 				<c:forEach items="${DataList}" var="item">
-				<tr class="text-c" id="${item.userId}">
-					<td><input type="checkbox" value="${item.userId}" name=""></td>
-					<td>${item.userId}</td>
-					<td>${item.userName}</td>
-					<td>${item.nickName}</td>
-					<td>${item.mobile}</td>
-					<td>${item.status}</td>
-					<td>${item.regDate}</td>
-					<td>${item.lastLoginTime}</td>
-					<td>${item.remark}</td>
+				<tr class="text-c" id="${item.categoryId}">
+					<td><input type="checkbox" value="${item.categoryId}" name=""></td>
+					<td>${item.categoryId}</td>
+					<td>${item.categoryName}</td>
+					<c:choose>
+					  <c:when test="${item.categoryParentId!=null}">
+					  	<td id="categoryParentIdName">${item.categoryParentIdName}</td>
+					  </c:when>
+					   <c:otherwise>
+					   		<td></td>
+					   </c:otherwise>
+					</c:choose>
 					<td class="td-manage">
 					<a style="text-decoration: none"
-						onClick="item_del(this,${item.userId})" href="javascript:;" title="删除" class="ml-5">
+						onClick="item_del(this,${item.categoryId})" href="javascript:;" title="删除" class="ml-5">
 						<i class="Hui-iconfont">&#xe6e2;</i></a> 
 					<a title="编辑"
 						href="javascript:;"
-						onclick="item_detail('编辑[id=${item.userId}]','Member_update?id=${item.userId}','1','800','500')"
+						onclick="item_detail('编辑[id=${item.categoryId}]','BookCategory_update?id=${item.categoryId}','1','800','500')"
 						class="ml-5" style="text-decoration: none"><i
 							class="Hui-iconfont">&#xe6df;</i></a> 
 						<a title="查看" href="javascript:;" 
-						onclick="item_detail('查看[Id=${item.userId}]','Member_detail?id=${item.userId}','4','800','500')"
+						onclick="item_detail('查看[Id=${item.categoryId}]','BookCategory_detail?id=${item.categoryId}&categoryParentIdName=${item.categoryParentIdName}','4','800','500')"
 						class="ml-5" style="text-decoration: none"><i
 							class="Hui-iconfont">&#xe707;</i></a>
 					</td>
@@ -140,6 +137,7 @@
 		src="${pageContext.request.contextPath}/static/H-ui.admin/lib/laypage/1.2/laypage.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			
 			$('.table-sort').dataTable({
 				"aaSorting" : [ [ 1, "desc" ] ],//默认第几个排序
 				"bStateSave" : true,//状态保存
@@ -152,7 +150,7 @@
 				]
 			});
 			$("#clearSearch").click(function(){
-				location.href = "Member_list"
+				location.href = "BookCategory_list"
 			});
 
 		});
@@ -161,7 +159,7 @@
 			layer_show(title, url, w, h);
 		}
 		/*用户-查看*/
-		function member_show(title, url, id, w, h) {
+		function BookCategory_show(title, url, id, w, h) {
 			layer_show(title, url, w, h);
 		}
 		function item_edit(title, url, id, w, h) {
@@ -173,7 +171,7 @@
 		}
 		
 		/*用户-停用*/
-		function member_stop(obj, id) {
+		function BookCategory_stop(obj, id) {
 			layer
 					.confirm(
 							'确认要停用吗？',
@@ -188,7 +186,7 @@
 														.parents("tr")
 														.find(".td-manage")
 														.prepend(
-																'<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+																'<a style="text-decoration:none" onClick="BookCategory_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
 												$(obj)
 														.parents("tr")
 														.find(".td-status")
@@ -208,7 +206,7 @@
 		}
 
 		/*用户-启用*/
-		function member_start(obj, id) {
+		function BookCategory_start(obj, id) {
 			layer
 					.confirm(
 							'确认要启用吗？',
@@ -223,7 +221,7 @@
 														.parents("tr")
 														.find(".td-manage")
 														.prepend(
-																'<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+																'<a style="text-decoration:none" onClick="BookCategory_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
 												$(obj)
 														.parents("tr")
 														.find(".td-status")
@@ -242,7 +240,7 @@
 							});
 		}
 		/*用户-编辑*/
-		function member_edit(title, url, id, w, h) {
+		function BookCategory_edit(title, url, id, w, h) {
 			layer_show(title, url, w, h);
 		}
 		/*密码-修改*/
@@ -254,7 +252,7 @@
 		layer.confirm('确认要删除吗？',function(index){
 			$.ajax({
 				type: 'POST',
-				url: 'Member_deleteDeal',
+				url: 'BookCategory_deleteDeal',
 				data:{
 					id:id
 				},
@@ -285,7 +283,7 @@
 					
 					$.ajax({
 						type: 'POST',
-						url: 'Member_deleteDeal',
+						url: 'BookCategory_deleteDeal',
 						async: false,
 						data: {"id": id},
 						success: function(data){

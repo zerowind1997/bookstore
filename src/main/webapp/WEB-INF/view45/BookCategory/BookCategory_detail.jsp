@@ -22,31 +22,37 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>类目描述</title>
+<title>书籍类别描述</title>
 <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
 <article class="page-container">
 	
-	<input type="hidden" name="catId" value="${bean.userId }" />
+	<input type="hidden" name="catId" value="${bean.categoryId }" />
 	
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>userid：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>categoryId：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			${bean.userId}
+			${bean.categoryId}
 		</div>
 	</div>
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名称：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书籍类别名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			${bean.userName}
+			${bean.categoryName}
 		</div>
 	</div>
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户昵称：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书籍类别父类id：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			${bean.nickName }
+			${bean.categoryParentId}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书籍类别父类名称：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.categoryParentIdName}
 		</div>
 	</div>
 	<div class="row cl">

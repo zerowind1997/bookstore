@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.uc.bean.Book;
+import edu.uc.bean.BookCategory;
 import edu.uc.service.BookService;
 import edu.uc.test.BaseTest;
 
@@ -23,7 +24,9 @@ public class BookDaoImplTest extends BaseTest {
 		book = new Book();
 		book.setBookId(1L);
 		book.setBookAuthor("林邵");
-		book.setBookCategoryId(1L);
+		BookCategory bookCategory = new BookCategory();
+		bookCategory.setCategoryId(1L);
+		book.setBookCategory(bookCategory);
 		book.setBookCbs("1231");
 		book.setBookNum(12);
 	}
@@ -33,18 +36,18 @@ public class BookDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testList() {
 		System.out.println("=============list============");
 		List<Book> BookList = bookDao.list();
 		for(Book Book:BookList)
 		{
-			System.out.println(Book.getBookId());
+			System.out.println(Book.getBookCategory().getCategoryId());
 		}
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testInsert() {
 		System.out.println("=============insert============");
 		Long result = bookDao.insert(book);
@@ -73,11 +76,22 @@ public class BookDaoImplTest extends BaseTest {
 	public void testLoad() {
 		System.out.println("======load======");
 		Book book = bookDao.load(1L);
-		System.out.println(book.getBookAuthor());
+		try
+		{
+		System.out.println(book.getBookCategory());
+		if(book.getBookCategory()!=null)
+		{
+			System.out.println(book.getBookCategory().getCategoryName());
+		}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage()+"123123");
+		}
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testCount() {
 		System.out.println("======count======");
 		Long result = bookDao.count();
@@ -85,7 +99,7 @@ public class BookDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testPager() {
 		System.out.println("======pager======");
 		List<Book> BookList = bookDao.pager(1L, 1L);
@@ -97,7 +111,7 @@ public class BookDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testLoadByName() {
 		System.out.println("======testLoadByName======");
 		Book Book = bookDao.loadByName("lny");
@@ -105,7 +119,7 @@ public class BookDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testCountByName() {
 		System.out.println("======testCountByName======");
 		Long result = bookDao.countByName("lny");
@@ -113,10 +127,11 @@ public class BookDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testPagerByName() {
 		System.out.println("======testPagerByName======");
 		List<Book> BookList = bookDao.pagerByName("lny",1L, 1L);
+	
 		for(Book Book:BookList)
 		{
 			System.out.println(Book.getBookId());

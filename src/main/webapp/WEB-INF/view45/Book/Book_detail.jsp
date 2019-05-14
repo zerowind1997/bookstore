@@ -22,32 +22,108 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>修改新闻${id}</title>
+<title>书籍类别描述</title>
 <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
 <article class="page-container">
-	<form action="NewsComment_updateDeal" method="post" class="form form-horizontal" id="form-bean-edit">
-	<!--  <input type="hidden" name="oper" value="updateDeal" />-->
-	<input type="hidden" name="id" value="${id }" />	
+	
+	<input type="hidden" name="catId" value="${bean.bookId }" />
+	
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>新闻id：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图书Id：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" value="${newsId }" placeholder="" id="newsId" name="newsId">
-		</div>
-	</div>
-	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>评论内容：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" autocomplete="off" value="${content }" placeholder="" id="content" name="content">
+			${bean.bookId}
 		</div>
 	</div>
 	
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>作者：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书籍类别名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" autocomplete="off" value="${author }" placeholder="" id="author" name="author">
+			<c:choose>
+					  <c:when test="${bean.bookCategory!=null}">
+					  	${bean.bookCategory.categoryName}
+					  </c:when>
+					   <c:otherwise>
+					   </c:otherwise>
+					</c:choose>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书籍名称：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.bookName}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书籍出版社：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.bookCbs}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>ISBN：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.ISBN}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书价：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.bookPrice}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书折扣价：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.discountRate}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书作者：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.bookAuthor}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书简介：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.bookNote}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书图片：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<img alt="" src="${pageContext.request.contextPath }${bean.bookPicPath}"></img>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书价：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.bookPrice}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书库存数：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			${bean.bookNum}
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书当前状态：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<c:choose>
+					  <c:when test="${bean.enableStatus==1}">
+					  	下架ing
+					  </c:when>
+					    <c:when test="${bean.enableStatus==2}">
+					  	上架ing
+					  </c:when>
+					   <c:otherwise>
+					   		未安排ing
+					   </c:otherwise>
+					</c:choose>
 		</div>
 	</div>
 	<div class="row cl">
@@ -58,10 +134,9 @@
 	</div>
 	<div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			<input class="btn btn-primary radius" type="button" id="close" value="&nbsp;&nbsp;关闭&nbsp;&nbsp;">
 		</div>
 	</div>
-	</form>
 </article>
 
 <!--_footer 作为公共模版分离出去--> 
@@ -82,27 +157,25 @@ $(function(){
 		increaseArea: '20%'
 	});
 	
+	$('#close').click(function(){
+		layer_close();
+	});
+	
 	$("#form-bean-edit").validate({
 		rules:{
-			newsId:{
+			catName:{
 				required: true
 			}
-			, content:{
-				required: true
-			}
-			,author:{
+			, catDesc:{
 				required: true
 			}
 		},
 		messages:{
-			newsId:{
-				required: "newsId不能为空"
+			catName:{
+				required: "类型名称不能为空"
 			}
-			, content:{
-				required: "内容不能为空"
-			}
-			,author:{
-				required: "作者不能为空"
+			, catDesc:{
+				required: "类型描述不能为空"
 			}
 		},
 		onkeyup: false,

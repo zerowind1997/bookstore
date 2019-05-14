@@ -76,4 +76,10 @@ public class BookCategoryServiceImpl extends BaseServiceImpl<BookCategory> imple
 		return bookCategoryDao.pagerByName(name, pageNum, pageSize);
 	}
 
+	@Override
+	public List<BookCategory> getParentIdList(Long id) {
+		// TODO Auto-generated method stub
+		return bookCategoryDao.getParentIdList(id);
+	}
+	
 }

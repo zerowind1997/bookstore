@@ -22,31 +22,28 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>新闻描述${bean.id}</title>
+<title>添加人员</title>
 <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
 <article class="page-container">
-	
-	<input type="hidden" name="catId" value="${bean.id }" />
-	
+	<form action="BookCategory_insertDeal" method="post" class="form form-horizontal" id="form-bean-edit">
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>新闻id：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类别名：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			${bean.newsId}
+			<input type="text" class="input-text" value="${categoryName }" placeholder="" id="categoryName" name="categoryName">
 		</div>
 	</div>
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>新闻内容：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			${bean.content}
-		</div>
-	</div>
-	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>新闻作者：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			${bean.author}
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>主类别：</label>
+		<div class="formControls col-xs-8 col-sm-9" >
+		<select id="selectedCategoryName" name="selectedCategoryName">
+			
+		</select>
+		<!--
+			<input type="text" class="input-text" autocomplete="off" value="${categoryParentIdName }" placeholder="" id="categoryParentIdName" name="categoryParentIdName">
+		  -->
 		</div>
 	</div>
 	<div class="row cl">
@@ -57,9 +54,10 @@
 	</div>
 	<div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-			<input class="btn btn-primary radius" type="button" id="close" value="&nbsp;&nbsp;关闭&nbsp;&nbsp;">
+			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
 		</div>
 	</div>
+	</form>
 </article>
 
 <!--_footer 作为公共模版分离出去--> 
@@ -70,35 +68,52 @@
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
-<script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/jquery.validation/1.14.0/additional-methods.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
 <script type="text/javascript">
 $(function(){
+	getSelected();
+	function getSelected()
+	{
+		var selectCategoryName='';
+		
+		$.ajax({
+ 			url:"Json_getCategoryNameList",
+ 			type: "POST",//发送的类型
+ 			dataType:"json",//返回的是json
+ 			success: function (data) {
+ 			 	var categoryNameList = data.data;
+ 			 	selectCategoryName+='<option value="0">无</option>';
+ 			 	for(var p in categoryNameList)
+ 			 	{
+ 			 		selectCategoryName+='<option value="'+categoryNameList[p].categoryId+'">'+categoryNameList[p].categoryName+'</option>';
+ 			 	}
+ 			 	$("#selectedCategoryName").html(selectCategoryName);
+ 			 	
+ 			 }
+ 		})
+	}
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
 		increaseArea: '20%'
 	});
 	
-	$('#close').click(function(){
-		layer_close();
-	});
-	
 	$("#form-bean-edit").validate({
 		rules:{
-			catName:{
+			userName:{
 				required: true
 			}
-			, catDesc:{
+			, nickName:{
 				required: true
 			}
 		},
 		messages:{
-			catName:{
-				required: "类型名称不能为空"
+			userName:{
+				required: "用户名不能为空"
 			}
-			, catDesc:{
-				required: "类型描述不能为空"
+			, nickName:{
+				required: "用户昵称不能为空"
 			}
 		},
 		onkeyup: false,

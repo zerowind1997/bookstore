@@ -74,5 +74,5 @@ public class AdminServiceImpl extends BaseServiceImpl<Manager> implements edu.uc
 		// TODO Auto-generated method stub
 		return adminDao.pagerByName(name, pageNum, pageSize);
 	}
-
+	
 }

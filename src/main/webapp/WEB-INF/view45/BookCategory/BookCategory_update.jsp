@@ -22,26 +22,26 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>修改新闻${id}</title>
+<title>书籍类别 ${catId}</title>
 <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
 <article class="page-container">
-	<form action="NewsExcont_updateDeal" method="post" class="form form-horizontal" id="form-bean-edit">
-	<!--  <input type="hidden" name="oper" value="updateDeal" />-->
-	<input type="hidden" name="id" value="${id }" />	
+	<form action="BookCategory_updateDeal" method="post" class="form form-horizontal" id="form-bean-edit">
+	<!-- <input type="hidden" name="oper" value="updateDeal" /> -->
+	<input type="hidden" name="id" value="${bean.categoryId}" />
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>新闻id：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>书籍类别名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" value="${newsId }" placeholder="" id="newsId" name="newsId">
-			
+			<input type="text" class="input-text" value="${bean.categoryName }" placeholder="" id="categoryName" name="categoryName">
 		</div>
 	</div>
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>内容：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类别所属类别：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" autocomplete="off" value="${content }" placeholder="" id="content" name="content">
+			<select id="selectedCategoryName" name="selectedCategoryName">
+			</select>
 		</div>
 	</div>
 	<div class="row cl">
@@ -66,10 +66,32 @@
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
-<script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/jquery.validation/1.14.0/additional-methods.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath }/static/H-ui.admin/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
 <script type="text/javascript">
 $(function(){
+	getSelected();
+	function getSelected()
+	{
+		var selectCategoryName='';
+		var categoryName="${bean.categoryName}";
+		$.ajax({
+ 			url:"Json_getCategoryNameList",
+ 			type: "POST",//发送的类型
+ 			dataType:"json",//返回的是json
+ 			success: function (data) {
+ 			 	var categoryNameList = data.data;
+ 			 	selectCategoryName+='<option value="0">无</option>';
+ 			 	for(var p in categoryNameList)
+ 			 	{
+ 			 		if(categoryNameList[p].categoryName!=categoryName)
+ 			 		selectCategoryName+='<option value="'+categoryNameList[p].categoryId+'">'+categoryNameList[p].categoryName+'</option>';
+ 			 	}
+ 			 	$("#selectedCategoryName").html(selectCategoryName);
+ 			 	
+ 			 }
+ 		})
+	}
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
@@ -78,20 +100,19 @@ $(function(){
 	
 	$("#form-bean-edit").validate({
 		rules:{
-			newsId:{
+			userName:{
 				required: true
 			}
-			, content:{
+			, nickName:{
 				required: true
 			}
-			
 		},
 		messages:{
-			newsId:{
-				required: "catId不能为空"
+			userName:{
+				required: "用户名不能为空"
 			}
-			, content:{
-				required: "标题不能为空"
+			, nickName:{
+				required: "用户昵称不能为空"
 			}
 		},
 		onkeyup: false,

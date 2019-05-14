@@ -1,26 +1,10 @@
-package edu.uc.bean;
+package edu.uc.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.springframework.stereotype.Component;
-
-@Component
-@Entity
-@Table(name="bookcategory")
-public class BookCategory {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="categoryId",length=50)
+public class BookCategoryHandle {
 	private Long categoryId;
-	@Column(name="categoryName",length=50)
 	private String categoryName;
-	@Column(name="categoryParentId",length=50)
 	private Long categoryParentId;
+	private String categoryParentIdName;
 	public Long getCategoryId() {
 		return categoryId;
 	}
@@ -38,6 +22,12 @@ public class BookCategory {
 	}
 	public void setCategoryParentId(Long categoryParentId) {
 		this.categoryParentId = categoryParentId;
+	}
+	public String getCategoryParentIdName() {
+		return categoryParentIdName;
+	}
+	public void setCategoryParentIdName(String categoryParentIdName) {
+		this.categoryParentIdName = categoryParentIdName;
 	}
 	
 }

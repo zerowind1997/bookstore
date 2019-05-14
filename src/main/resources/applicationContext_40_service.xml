@@ -24,6 +24,7 @@
 			<tx:method name="list*" read-only="true" />
 			<tx:method name="count*" read-only="true" />
 			<tx:method name="pager*" read-only="true" />
+			<tx:method name="get*" read-only="true" />
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="del*" propagation="REQUIRED" />
