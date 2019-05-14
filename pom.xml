@@ -8,7 +8,7 @@
 	<name>bookStore</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-  
+
 		<!-- ***** 0000.[compile plugin][props] -->
 		<maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
 		<jdk.source.version>1.8</jdk.source.version>
