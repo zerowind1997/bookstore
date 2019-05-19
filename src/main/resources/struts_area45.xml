@@ -99,6 +99,11 @@
 		
 		
 		<!--  -->
+		<action name="OrderComment_*" class="OrderCommentAction" method="{1}">
+			<result name="introduce">/WEB-INF/view45/Book/Book_introduce.jsp</result>
+			<allowed-methods>listDeal</allowed-methods>
+		</action>
+		
 		
 		<action name="*_*" class="{1}Action" method="{2}">
 			<result name="list">/WEB-INF/view45/{1}/{1}_list.jsp</result>
@@ -111,6 +116,15 @@
 			</allowed-methods>
 		</action>
 		
+		<action name="Book_search" class="BookAction" method="search">
+			<result name="search">/WEB-INF/view45/Book/Book_search.jsp</result>
+			<allowed-methods>search</allowed-methods>
+		</action>
+		
+		<action name="Book_look" class="BookAction" method="listDeal">
+			<result name="search">/WEB-INF/view45/Book/Book_search.jsp</result>
+			<allowed-methods>listDeal</allowed-methods>
+		</action>
 		
 	</package>
 </struts>

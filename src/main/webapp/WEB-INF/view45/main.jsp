@@ -92,6 +92,14 @@
 			</ul>
 		</dd>
 	</dl>
+	<dl id="menu-product">
+			<dt><i class="Hui-iconfont">&#xe620;</i> 消息管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="HeadLine_list" data-title="头条管理" href="javascript:void(0)">头条管理</a></li>
+			</ul>
+		</dd>
+	</dl>
 		<dl id="menu-member">
 			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>

@@ -1,6 +1,6 @@
 package edu.uc.bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,15 +20,13 @@ public class OrderComment {
 	@Column(name="id",length=50)
 	private Long id;
 	@Column(name="userId",length=50)
-	private Integer userId;
+	private String userId;
 	@Column(name="userNick",length=50)
 	private String userNick;
-	@Column(name="praise",length=3)
-	private Integer praise;
+	@Column(name="praise",length=10)
+	private String praise;
 	@Column(name="comment",length=255)
 	private String comment;
-	@Column(name="star",length=3)
-	private Integer star;
 	@Column(name="commentDate")
 	private Date commentDate;
 	public Long getId() {
@@ -37,10 +35,10 @@ public class OrderComment {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getUserNick() {
@@ -49,10 +47,10 @@ public class OrderComment {
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
 	}
-	public Integer getPraise() {
+	public String getPraise() {
 		return praise;
 	}
-	public void setPraise(Integer praise) {
+	public void setPraise(String praise) {
 		this.praise = praise;
 	}
 	public String getComment() {
@@ -60,12 +58,6 @@ public class OrderComment {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
-	}
-	public Integer getStar() {
-		return star;
-	}
-	public void setStar(Integer star) {
-		this.star = star;
 	}
 	public Date getCommentDate() {
 		return commentDate;

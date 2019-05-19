@@ -23,7 +23,7 @@ public class OrderCommentDaoImplTest extends BaseTest {
 	public void setUp() throws Exception {
 		orderComment = new OrderComment();
 		orderComment.setUserNick("lny3");
-		orderComment.setCommentDate(new Date());
+		//orderComment.setCommentDate(new Date());
 	}
 
 	@After

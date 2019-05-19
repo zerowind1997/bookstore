@@ -2,7 +2,10 @@ package edu.uc.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
@@ -29,6 +32,7 @@ public class BookAction extends CrudAction {
 	private static final long serialVersionUID = -8168298155398369626L;
 	//书名称
 	private String bookName;
+	private String bookCategoryId;
 	private String selectedCategoryName;
 	private String bookAuthor;
 	private String bookNum;
@@ -42,8 +46,26 @@ public class BookAction extends CrudAction {
 	private String id;
 	private String discountRate;
 	
+	private String type;
 	
 	
+	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getBookCategoryId() {
+		return bookCategoryId;
+	}
+
+	public void setBookCategoryId(String bookCategoryId) {
+		this.bookCategoryId = bookCategoryId;
+	}
 
 	public String getDiscountRate() {
 		return discountRate;
@@ -176,35 +198,66 @@ public class BookAction extends CrudAction {
 		request.put("DataList", vDataList);
 		return "list";
 	}
-
+	
+	public String search() {
+		// TODO Auto-generated method stub
+		
+		return "search";
+	}
+	
 	@Override
 	public String listDeal() {
-		request.put("bookName", bookName);
-		List<Book> vDataList =null;
-		
-		//创建分页对象
-		PagerItem pagerItem = new PagerItem();
+		request.put("bookName",bookName);
+		request.put("bookCategoryId", bookCategoryId);
+		List<Book> dataList=null;
+		PagerItem pagerItem=new PagerItem();
 		pagerItem.parsePageNum(pageNum);
 		pagerItem.parsePageSize(pageSize);
-		
-		//定义记录变量数
-		Long rowCount = 0L;
+		String result="";
+		Long count=0L;
 		if(!SysFun.isNullOrEmpty(bookName))
 		{
-			rowCount = bookService.countByName(bookName);
-			pagerItem.changeRowCount(rowCount);
-			vDataList = bookService.pagerByName(bookName, pagerItem.getPageNum(), pagerItem.getPageSize());
+			count=bookService.countByName(bookName);
+			pagerItem.changeRowCount(count);
+			dataList=bookService.pagerByName(bookName, pagerItem.getPageNum(), pagerItem.getPageSize());
+			if((!SysFun.isNullOrEmpty(type))&&type.equals("foreground")) {
+				List<Book> CategoryList=new ArrayList<Book>();
+				for(int i=0;i<dataList.size();i++) {
+					Book book=dataList.get(i);
+					if(i==0)
+						CategoryList.add(book);
+					else
+					{
+						int j=0;
+						for(;j<CategoryList.size();j++) {
+							Long id=CategoryList.get(j).getBookCategory().getCategoryId();
+							if(id==book.getBookCategory().getCategoryId())
+								break;
+						}
+						if(j==CategoryList.size())
+							CategoryList.add(book);
+					}
+					
+				}
+				request.put("CategoryList", CategoryList);
+				result="search";
+			}
+			else 
+				result="list";	
 		}
 		else
 		{
-			rowCount = bookService.count();
-			pagerItem.changeRowCount(rowCount);
-			vDataList = bookService.pager(pagerItem.getPageNum(), pagerItem.getPageSize());
+			count=bookService.count();
+			pagerItem.changeRowCount(count);
+			dataList=bookService.pager(pagerItem.getPageNum(), pagerItem.getPageSize());
+			result="list";
 		}
-		pagerItem.changeUrl(SysFun.generalUrl(requestURI,queryString));
+		
+		pagerItem.changeUrl(SysFun.generalUrl(requestURI, queryString));
+		request.put("DataList", dataList);
 		request.put("pagerItem", pagerItem);
-		request.put("DataList", vDataList);
-		return "list";
+		System.out.println(result);
+		return result;
 	}
 
 	@Override
