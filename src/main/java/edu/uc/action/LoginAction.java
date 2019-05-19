@@ -50,7 +50,7 @@ public class LoginAction extends BaseAction {
 		System.out.println(this);
 	}
 	@Autowired
-	private 	AdminService adminService;
+	private AdminService adminService;
 	public String view() {
 		String result="view";
 		return result;

@@ -76,4 +76,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer> implements Cu
 		return customerDao.pagerByName(name, pageNum, pageSize);
 	}
 
+	@Override
+	public Customer loadByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return customerDao.loadByUserId(userId);
+	}
+
 }

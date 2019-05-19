@@ -197,4 +197,23 @@ public class CustomerDaoImpl extends BaseDaoImpl<Customer> implements CustomerDa
 		return CustomerList;
 	}
 
+	@Override
+	public Customer loadByUserId(String userId) {
+		Customer Customer = null;
+		String hql = "from Customer where userId=?0";
+		hql += " order by id desc";
+		List<Object> arrParams = new ArrayList<Object>();
+		arrParams.add(userId);
+		Object[] params = arrParams.toArray();
+		try {
+			Customer = getTmpl().execute(this.getCallbackBean(Customer.class, hql, params));
+		} catch (Exception e) {
+			throw new RuntimeException();
+
+		} finally {
+
+		}
+		return Customer;
+	}
+
 }
