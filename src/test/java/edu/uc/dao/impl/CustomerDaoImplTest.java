@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import edu.uc.bean.Customer;
 import edu.uc.service.CustomerService;
 import edu.uc.test.BaseTest;
+import edu.uc.util.MD5util;
 
 public class CustomerDaoImplTest extends BaseTest {
 	@Autowired
@@ -20,8 +21,8 @@ public class CustomerDaoImplTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		customer = new Customer();
-		customer.setUserId("231321");
-		customer.setUserPass("12312");
+		customer.setUserId("1175086798@qq.com");
+		customer.setUserPass(MD5util.getMD5BySalt(customer.getUserId(), "123456"));
 		customer.setUserNick("lny");
 		
 	}
@@ -31,7 +32,7 @@ public class CustomerDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testList() {
 		System.out.println("=============list==========");
 		List<Customer> CustomerList = customerDao.list();
@@ -42,7 +43,7 @@ public class CustomerDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testInsert() {
 		System.out.println("=============insert==========");
 		Long result = customerDao.insert(customer);
@@ -66,7 +67,7 @@ public class CustomerDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testLoad() {
 		System.out.println("=============load==========");
 		Customer customer = customerDao.load(2L);
@@ -74,7 +75,7 @@ public class CustomerDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testCount() {
 		System.out.println("=============count==========");
 		Long result = customerDao.count();
@@ -82,7 +83,7 @@ public class CustomerDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testPager() {
 		System.out.println("=============pager==========");
 		List<Customer> CustomerList = customerDao.pager(1L, 1L);
@@ -94,7 +95,7 @@ public class CustomerDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testLoadByName() {
 		System.out.println("=============loadbyname==========");
 		Customer Customer = customerDao.loadByName("lny2");
@@ -102,7 +103,7 @@ public class CustomerDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testCountByName() {
 		System.out.println("=============countByName==========");
 		Long result = customerDao.countByName("lny2");
@@ -110,7 +111,7 @@ public class CustomerDaoImplTest extends BaseTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void testPagerByName() {
 		System.out.println("=============loadbyname==========");
 		List<Customer> CustomerList = customerDao.pagerByName("lny",1L, 1L);

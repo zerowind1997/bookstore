@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.liuvei.common.PagerItem;
 import com.liuvei.common.SysFun;
 
@@ -155,11 +154,11 @@ public class CustomerAction extends CrudAction{
 
 	@Override
 	public String insertDeal() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 注册有点问题
 		request.put("userId", userId);
 		request.put("userNick",userNick);
 		request.put("email",email);
-		userPass=MD5util.getMD5BySalt(userNick, userPass);
+		userPass=MD5util.getMD5BySalt(userId, userPass);
 		request.put("userPass", userPass);
 		request.put("phone",phone);
 		request.put("address", address);

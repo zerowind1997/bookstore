@@ -2,21 +2,14 @@ package edu.uc.action;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.persistence.Column;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.components.Head;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 
 import com.liuvei.common.PagerItem;
 import com.liuvei.common.SysFun;
 
-import edu.uc.bean.Customer;
 import edu.uc.bean.HeadLine;
 import edu.uc.service.HeadLineService;
 

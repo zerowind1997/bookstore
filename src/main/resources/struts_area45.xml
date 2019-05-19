@@ -53,7 +53,7 @@
 						<param name="contextType">text/html;charset=UTF-8</param>
 						<param name="inputName">rspStream</param>
 				</result>
-				<allowed-methods>getCategoryNameList,updateEnableStatus</allowed-methods>
+				<allowed-methods>getCategoryNameList,updateEnableStatus,updateUserPassword</allowed-methods>
 		</action>
 		<action name="ValidateCode" class="ValidateCodeAction" method="execute">
 			<result type="stream">
@@ -74,8 +74,31 @@
 			<result name="welcome">/WEB-INF/view45/welcome.jsp</result>
 			<interceptor-ref name="myStack"></interceptor-ref>
 			<allowed-methods>view,welcome</allowed-methods>
-			
 		</action>
+		<!-- 前端action Index-->
+		<action name="Index_*" class="IndexAction" method="{1}">
+			<result name="view">/WEB-INF/view45/Front/home.jsp</result>
+			<result name="login">/WEB-INF/view45/Front/login.jsp</result>
+			<result name="register">/WEB-INF/view45/Front/register.jsp</result>
+			<allowed-methods>view,login,register</allowed-methods>
+		</action>
+		<action name="Personal_*" class="PersonalAction" method="{1}">
+			<result name="personal">/WEB-INF/view45/Front/Person/index.jsp</result>
+			<result name="address">/WEB-INF/view45/Front/Person/address.jsp</result>
+			<result name="information">/WEB-INF/view45/Front/Person/information.jsp</result>
+			<result name="password">/WEB-INF/view45/Front/Person/password.jsp</result>
+			<allowed-methods>personal,address,updateAddress,information,informationUpdate,password,passwordUpdate</allowed-methods>
+		</action>
+		<action name="FrontLogin_*" class="FrontLoginAction" method="{1}">
+			<result name="login">/WEB-INF/view45/Front/login.jsp</result>
+			<result name="register">/WEB-INF/view45/Front/register.jsp</result>
+			<!-- 重新指向某个Action -->
+			<result name="index" type="redirectAction">Index_view</result>
+			<allowed-methods>logoutDeal,loginDeal,index,registerDeal</allowed-methods>
+		</action>
+		
+		
+		<!--  -->
 		
 		<action name="*_*" class="{1}Action" method="{2}">
 			<result name="list">/WEB-INF/view45/{1}/{1}_list.jsp</result>

@@ -16,8 +16,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import edu.uc.bean.Book;
 import edu.uc.bean.BookCategory;
+import edu.uc.bean.Customer;
 import edu.uc.service.BookCategoryService;
 import edu.uc.service.BookService;
+import edu.uc.service.CustomerService;
+import edu.uc.util.MD5util;
 
 @Component("JsonAction")
 @Scope("prototype")
@@ -31,6 +34,8 @@ public class JsonAction extends ActionSupport {
 	private BookCategoryService bookCategoryService;
 	@Autowired
 	private BookService bookService;
+	@Autowired
+	private CustomerService customerService;
 	private InputStream rspStream;
 	private String id;
 
@@ -118,6 +123,31 @@ public class JsonAction extends ActionSupport {
 			//System.out.println();
 			map.put("success", true);
 			map.put("status", book.getEnableStatus());
+			//map.put("status", book.getEnableStatus());
+			try {
+				strResult = mapper.writeValueAsString(map);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				map.put("success", false);
+				map.put("msg", e.getMessage());
+			}
+		}
+		rspStream = toStream(strResult);
+		return SUCCESS;
+	}
+	public String updateUserPassword()
+	{
+		String strResult="";
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(!SysFun.isNullOrEmpty(id))
+		{
+			Long vId = SysFun.parseLong(id);
+			Customer bean = customerService.load(vId);
+			bean.setUserPass(MD5util.getMD5BySalt(bean.getUserId(), "123456"));
+			customerService.update(bean);
+			map.put("success", true);
+			map.put("bean", bean);
 			//map.put("status", book.getEnableStatus());
 			try {
 				strResult = mapper.writeValueAsString(map);
