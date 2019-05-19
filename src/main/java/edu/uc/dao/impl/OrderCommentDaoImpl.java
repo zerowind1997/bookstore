@@ -197,4 +197,62 @@ public class OrderCommentDaoImpl extends BaseDaoImpl<OrderComment> implements Or
 		return OrderCommentList;
 	}
 
+	@Override
+	public Long countById(Long bookId) {
+		// TODO Auto-generated method stub
+		Long result = 0L;
+		String hql = "select count(1) from OrderComment where bookId=?0";
+		List<Object> arrParams = new ArrayList<Object>();
+		arrParams.add(bookId);
+		Object[] params = arrParams.toArray();
+		try {
+			result = getTmpl().execute(this.getCallbackScalarLong(hql, params));
+		} catch (Exception e) {
+			throw new RuntimeException();
+		} finally {
+		}
+		return result;
+	}
+
+	@Override
+	public Long countByPraise(String praise, Long bookId) {
+		// TODO Auto-generated method stub
+		Long result = 0L;
+		String hql = "select count(1) from OrderComment where bookId=?0 and praise=?1";
+		List<Object> arrParams = new ArrayList<Object>();
+		arrParams.add(bookId);
+		arrParams.add(praise);
+		Object[] params = arrParams.toArray();
+		try {
+			result = getTmpl().execute(this.getCallbackScalarLong(hql, params));
+		} catch (Exception e) {
+			throw new RuntimeException();
+		} finally {
+		}
+		return result;
+	}
+
+	@Override
+	public List<OrderComment> pagerById(Long bookId, Long pageNum, Long pageSize) {
+		// TODO Auto-generated method stub
+		List<OrderComment> OrderCommentList = new ArrayList<OrderComment>();
+		Long vStart = 0L;
+		vStart = (pageNum - 1) * pageSize;
+		String hql = "from OrderComment where bookId=?0";
+		hql += " order by id desc";
+		List<Object> arrParams = new ArrayList<Object>();
+		arrParams.add(bookId);
+		Object[] params = arrParams.toArray();
+		try {
+
+			OrderCommentList = getTmpl().execute(this.getCallbackPager(OrderComment.class, vStart, pageSize, hql, params));
+		} catch (Exception e) {
+			throw new RuntimeException();
+
+		} finally {
+
+		}
+		return OrderCommentList;
+	}
+
 }

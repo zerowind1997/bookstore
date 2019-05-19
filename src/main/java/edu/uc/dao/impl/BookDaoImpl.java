@@ -70,7 +70,7 @@ public class BookDaoImpl extends BaseDaoImpl<Book> implements BookDao {
 		Long result = 0L;
 		try {
 			getTmpl().update(bean);
-			result = bean.getBookId();
+			result = 1L;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -150,6 +150,7 @@ public class BookDaoImpl extends BaseDaoImpl<Book> implements BookDao {
 		}
 		return Book;
 	}
+	
 
 	@Override
 	public Long countByName(String name) {
@@ -198,5 +199,52 @@ public class BookDaoImpl extends BaseDaoImpl<Book> implements BookDao {
 		return BookList;
 	}
 
+	@Override
+	public Long countById(String name, Long bookCategoryId) {
+		// TODO Auto-generated method stub
+		Long result = 0L;
+		name = "%" + name + "%";
+		String hql = "select count(1) from Book where bookName like ?0";
+		hql+="and bookCategoryId="+bookCategoryId;
+		List<Object> arrParams = new ArrayList<Object>();
+		arrParams.add(name);
+		Object[] params = arrParams.toArray();
+		try {
 
+			result = getTmpl().execute(this.getCallbackScalarLong(hql, params));
+
+		} catch (Exception e) {
+			throw new RuntimeException();
+
+		} finally {
+
+		}
+		return result;
+	}
+
+	@Override
+	public List<Book> pagerById(String name, Long bookCategoryId, Long pageNum, Long pageSize) {
+		// TODO Auto-generated method stub
+		List<Book> BookList = new ArrayList<Book>();
+		Long vStart = 0L;
+		name = "%" + name + "%";
+		vStart = (pageNum - 1) * pageSize;
+		String hql = "from Book where bookName like ?0";
+		hql+="and bookCategoryId="+bookCategoryId;
+		hql += " order by bookId desc";
+		List<Object> arrParams = new ArrayList<Object>();
+		arrParams.add(name);
+		Object[] params = arrParams.toArray();
+		try {
+
+			BookList = getTmpl().execute(this.getCallbackPager(Book.class, vStart, pageSize, hql, params));
+		} catch (Exception e) {
+			throw new RuntimeException();
+
+		} finally {
+
+		}
+		return BookList;
+	}
+	
 }

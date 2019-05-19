@@ -75,4 +75,22 @@ public class OrderCommentServiceImpl extends BaseServiceImpl<OrderComment> imple
 		return orderCommentDao.pagerByName(name, pageNum, pageSize);
 	}
 
+	@Override
+	public Long countById(Long bookId) {
+		// TODO Auto-generated method stub
+		return orderCommentDao.countById(bookId);
+	}
+
+	@Override
+	public Long countByPraise(String praise, Long bookId) {
+		// TODO Auto-generated method stub
+		return orderCommentDao.countByPraise(praise, bookId);
+	}
+
+	@Override
+	public List<OrderComment> pagerById(Long bookId, Long pageNum, Long pageSize) {
+		// TODO Auto-generated method stub
+		return orderCommentDao.pagerById(bookId, pageNum, pageSize);
+	}
+
 }
